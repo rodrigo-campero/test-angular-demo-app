@@ -1,0 +1,93 @@
+<h1 class="title">
+  <span *ngIf="f.clientId">Editar</span>
+  <span *ngIf="!f.clientId">Novo</span> cliente</h1>
+<form [formGroup]="clientForm" (ngSubmit)="onSubmit()" class="form">
+  <div class="field">
+    <label class="label">Nome</label>
+    <div class="control has-icons-left">
+      <input [class]="f.firstName.invalid ? 'input is-danger' : 'input is-success'" type="text" [formControl]="f.firstName"
+        autocomplete="off">
+      <span *ngIf="f.firstName.invalid" class="icon is-small is-left">
+        <i class="fas fa-exclamation-triangle"></i>
+      </span>
+      <span *ngIf="!f.firstName.invalid" class="icon is-small is-left">
+        <i class="fas fa-check"></i>
+      </span>
+    </div>
+    <div *ngIf="f.firstName.invalid">
+      {{getErrorMessageForFirstNameField()}}
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Sobrenome</label>
+    <div class="control has-icons-left">
+      <input [class]="f.lastName.invalid ? 'input is-danger' : 'input is-success'" type="text" [formControl]="f.lastName"
+        autocomplete="off">
+      <span *ngIf="f.lastName.invalid" class="icon is-small is-left">
+        <i class="fas fa-exclamation-triangle"></i>
+      </span>
+      <span *ngIf="!f.lastName.invalid" class="icon is-small is-left">
+        <i class="fas fa-check"></i>
+      </span>
+    </div>
+    <div *ngIf="f.lastName.invalid">
+      {{getErrorMessageForLastNameField()}}
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">E-mail</label>
+    <div class="control has-icons-left">
+      <input [class]="f.email.invalid ? 'input is-danger' : 'input is-success'" type="text" [formControl]="f.email"
+        autocomplete="off">
+      <span *ngIf="f.email.invalid" class="icon is-small is-left">
+        <i class="fas fa-exclamation-triangle"></i>
+      </span>
+      <span *ngIf="!f.email.invalid" class="icon is-small is-left">
+        <i class="fas fa-check"></i>
+      </span>
+    </div>
+    <div *ngIf="f.email.invalid">
+      {{getErrorMessageForEmailField()}}
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Telefone</label>
+    <div class="control has-icons-left">
+      <input [class]="f.phone.invalid ? 'input is-danger' : 'input is-success'" type="text" [formControl]="f.phone"
+        autocomplete="off" [textMask]="{mask: phonemask}">
+      <span *ngIf="f.phone.invalid" class="icon is-small is-left">
+        <i class="fas fa-exclamation-triangle"></i>
+      </span>
+      <span *ngIf="!f.phone.invalid" class="icon is-small is-left">
+        <i class="fas fa-check"></i>
+      </span>
+    </div>
+    <div *ngIf="f.phone.invalid">
+      {{getErrorMessageForPhoneField()}}
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Sexo</label>
+    <div class="control is-expanded has-icons-left">
+      <div [class]="f.gender.invalid ? 'select is-fullwidth is-danger' : 'select is-fullwidth is-success'">
+        <select [formControl]="f.gender">
+          <option *ngFor="let option of options" [value]="option.value">{{ option.name }}</option>
+        </select>
+      </div>
+      <span *ngIf="f.gender.invalid" class="icon is-small is-left">
+        <i class="fas fa-exclamation-triangle"></i>
+      </span>
+      <span *ngIf="!f.gender.invalid" class="icon is-small is-left">
+        <i class="fas fa-check"></i>
+      </span>
+    </div>
+    <div *ngIf="f.gender.invalid">
+      {{getErrorMessageForGenderField()}}
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+      <button class="button is-link" type="submit" [disabled]="clientForm.invalid">Confirmar</button>
+    </div>
+  </div>
+</form>

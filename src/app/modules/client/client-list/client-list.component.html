@@ -1,0 +1,47 @@
+<h1 class="title">Clientes</h1>
+<a class="button is-info" style="float: right;" [routerLink]="['add']">
+    <span class="icon">
+        <i class="fa fa-plus"></i>
+    </span>
+    <span>Novo</span>
+</a>
+<br/>
+<br/>
+<div class="field">
+    <div class="control">
+        <input class="input is-info" #search (keyup)="0" type="search" placeholder="Nome do cliente...">
+    </div>
+</div>
+<table class="table is-responsive is-fullwidth">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>E-mail</th>
+      <th>Telefone</th>
+      <th>Sexo</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let client of clients | filterByName: search.value">
+      <td>{{ client.firstName }} {{ client.lastName }}</td>
+      <td>{{ client.email }}</td>
+      <td>{{ client.phone }}</td>
+      <td>{{ options[client.gender].name }}</td>
+      <td>
+        <div class="buttons has-addons is-right">
+            <a class="button tooltip" [routerLink]="['/client/edit', client.clientId]" data-tooltip="Editar">
+                <span class="icon">
+                    <i class="fa fa-edit"></i>
+                </span>
+            </a>
+            <button class="button tooltip" (click)="remove(client)" data-tooltip="Excluir">
+                <span class="icon">
+                    <i class="fa fa-trash"></i>
+                </span>
+            </button>
+        </div>
+    </td>
+    </tr>
+  </tbody>
+</table>
